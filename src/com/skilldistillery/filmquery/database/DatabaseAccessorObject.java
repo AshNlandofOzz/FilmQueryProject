@@ -94,35 +94,6 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 	return films;
   }
 	  
-  
-//  public ArrayList<Actor> findActorById(int actorId) throws SQLException {
-//	  ArrayList<Actor> actors = null;
-//	  Actor actor = null;
-//	  String user = "student";
-//	    String pass = "student";
-//	    Connection conn = DriverManager.getConnection(URL,user,pass);
-//	  
-//	  
-//	  
-//	  String sql = "SELECT id, first_name, last_name FROM actor WHERE id = ?";
-//	  PreparedStatement stmt = conn.prepareStatement(sql);
-//	  stmt.setInt(1,actorId);
-//	  
-//	  ResultSet actorResult = stmt.executeQuery();
-//	  
-//	  while (actorResult.next()) {
-//	    actor = new Actor(); // Create the object
-//	    // Here is our mapping of query columns to our object fields:
-//	    actor.setId(actorResult.getInt("id"));
-//	    actor.setFirstName(actorResult.getString("first_name"));
-//	    actor.setLastName(actorResult.getString("last_name"));
-//	    //actor.setFilms(findFilmsByActorId(actorId)); // An Actor has Films
-//	    actors.addActor(actor);
-//	  }
-//	  
-//	  return actors;
-//	}
-
 
 @Override
 public ArrayList<Actor> findActorsByFilmId(int filmId) throws SQLException {
@@ -153,14 +124,6 @@ public ArrayList<Actor> findActorsByFilmId(int filmId) throws SQLException {
 		  
 		  return actors;
 		}
-//			  return films;
-//	return null;
-//}
 
-@Override
-public ArrayList<Actor> findActorById(int actorId) throws SQLException {
-	// TODO Auto-generated method stub
-	return null;
-}
 
 }
