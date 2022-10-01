@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import com.skilldistillery.filmquery.database.DatabaseAccessor;
 import com.skilldistillery.filmquery.database.DatabaseAccessorObject;
+import com.skilldistillery.filmquery.entities.Actor;
 import com.skilldistillery.filmquery.entities.Film;
 
 public class FilmQueryApp {
@@ -42,6 +43,10 @@ public class FilmQueryApp {
 			    System.out.println("Rating: " + film.getRating());
 			    System.out.println("Description: " + film.getDescription());
 			    System.out.println("Language: " + film.getLanguage());
+			    System.out.println("Actors: ");
+			    for (Actor a : db.findActorsByFilmId(filmId)) {
+					System.out.println("   " + a.getFirstName() + " " + a.getLastName() + " ");
+			 	}
 			  } else { 
 			  System.out.println("No such film in database");
 		  }
@@ -60,6 +65,9 @@ public class FilmQueryApp {
 			    System.out.println("Rating: " + film2.getRating());
 			    System.out.println("Description: " + film2.getDescription());
 			    System.out.println("Language: " + film2.getLanguage());
+			    for (Actor a : db.findActorsByFilmId(film2.getId())) {
+					System.out.println("   " + a.getFirstName() + " " + a.getLastName() + " ");
+			 	}
 			  } else { 
 			  System.out.println("No such film in database");
 		  }}
