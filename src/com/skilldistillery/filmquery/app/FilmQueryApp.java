@@ -1,6 +1,7 @@
 package com.skilldistillery.filmquery.app;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.skilldistillery.filmquery.database.DatabaseAccessor;
@@ -13,32 +14,7 @@ public class FilmQueryApp {
 
 	public static void main(String[] args) throws SQLException {
 		FilmQueryApp app = new FilmQueryApp();
-		 app.homeMenu();
-		  int option = 0;
-		  Scanner input = new Scanner(System.in);
-		  option = input.nextInt();
-		  do {
-		  switch (option) {
-		  case 1:
-			  System.out.print("Enter a film ID");
-			  int filmId = input.nextInt();
-			  app.db.findFilmById(filmId);
-			  app.homeMenu();
-			  option = input.nextInt();
-			 break;
-		  case 2:
-			  System.out.println("Please enter a keyword");
-			  String keyword = input.nextLine();
-			  break;
-		  case 3:
-			  System.out.println("You have decided to exit. Goodbye!");
-			  break;
-			default:
-				System.out.println("That is not an option, please re-enter option 1-3.");
-				break;
-		  }}while(option != 3);
-//    app.test();
-//		app.launch();
+		app.launch();
 
 	}
 	
@@ -48,40 +24,61 @@ public class FilmQueryApp {
 		System.out.println(film);
 	}
 
-//	private void launch() {
-//		Scanner input = new Scanner(System.in);
-//
-//		startUserInterface(input);
-//
-//		input.close();
-//	}
+	private void launch() throws SQLException {
+		homeMenu();
+	  int option = 0;
+	  Scanner input = new Scanner(System.in);
+	  option = input.nextInt();
+	  do {
+	  switch (option) {
+	  case 1:
+
+		  System.out.print("Enter a film ID");
+		  int filmId = input.nextInt();
+		  Film film = db.findFilmById(filmId);
+		  if (film != null) {
+			    System.out.println("Title: " + film.getTitle());
+			    System.out.println("Release Year: " + film.getReleaseYear());
+			    System.out.println("Rating: " + film.getRating());
+			    System.out.println("Description: " + film.getDescription());
+			    System.out.println("Language: " + film.getLanguage());
+			  } else { 
+			  System.out.println("No such film in database");
+		  }
+		  homeMenu();
+		  option = input.nextInt();
+		 break;
+	  case 2:
+		  System.out.println("Please enter a keyword");
+		  String keyword = input.next();
+		  ArrayList<Film> films = db.findByKeyword(keyword);
+		  for (Film film2 : films) {
+			  
+		  if (films.size() != 0) {
+			    System.out.println("Title: " + film2.getTitle());
+			    System.out.println("Release Year: " + film2.getReleaseYear());
+			    System.out.println("Rating: " + film2.getRating());
+			    System.out.println("Description: " + film2.getDescription());
+			    System.out.println("Language: " + film2.getLanguage());
+			  } else { 
+			  System.out.println("No such film in database");
+		  }}
+		  homeMenu();
+		  option = input.nextInt();
+		  break;
+	  case 3:
+		  System.out.println("You have decided to exit. Goodbye!");
+		  break;
+		default:
+			System.out.println("That is not an option, please re-enter option 1-3.");
+			break;
+	  }}while(option != 3);
+
+		input.close();
+	}
 
 	private void startUserInterface(Scanner input) {
-//	  int filmId = 0;
-//	  int option = 0;
-//	  while(option != 3) {
-//		 homeMenu();
-//	option = input.nextInt();
-//	  switch (option) {
-//	  case 1:
-//		  System.out.print("Enter a film ID");
-//		  filmId = input.nextInt();
-//		  findFilmById(filmId);
-//		  if(app.findFilmById(filmId) = null) {
-//			  System.out.println("There are no films with that id. Please make a new selection.");
-//		  }
-//		  else
-//		 break;
-//	  case 2:
-//		  //
-//		  break;
-//	  case 3:
-//		  System.out.println("You have decided to exit. Goodbye!");
-//		  break;
-//		default:
-//			System.out.println("That is not an option, please re-enter option 1-3.");
-//			break;
-//	  }
+
 	  }
 
 	public void homeMenu() {
