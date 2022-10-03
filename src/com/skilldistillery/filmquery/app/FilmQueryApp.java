@@ -48,6 +48,7 @@ public class FilmQueryApp {
 					}
 				} else {
 					System.out.println("No such film in database");
+					break;
 				}
 				int option2 = 0;
 				do {
@@ -80,8 +81,8 @@ public class FilmQueryApp {
 				System.out.println("Please enter a keyword");
 				String keyword = input.next();
 				ArrayList<Film> films = db.findByKeyword(keyword);
-				for (Film film2 : films) {
-					if (films.size() != 0) {
+				if (films.size() != 0) {
+					for (Film film2 : films) {					
 						System.out.println("Title: " + film2.getTitle());
 						System.out.println("Release Year: " + film2.getReleaseYear());
 						System.out.println("Rating: " + film2.getRating());
@@ -91,10 +92,14 @@ public class FilmQueryApp {
 							System.out.println("   " + a.getFirstName() + " " + a.getLastName() + " ");
 						}
 						System.out.println();
-					} else {
-						System.out.println("No such film in database");
 					}
+				} 
+				else {
+					System.out.println("No such film in database");
+					break;
 				}
+				
+
 				do {
 					subMenu();
 					option2 = input.nextInt();
